@@ -78,8 +78,7 @@ public class App {
             valor = leerEntero();
 
             if (valor < minimo || valor > maximo) {
-                System.out.println("El valor debe estar entre "
-                        + minimo + " y " + maximo + ".");
+                System.out.println("El valor debe estar entre " + minimo + " y " + maximo + ".");
             }
         } while (valor < minimo || valor > maximo);
 
