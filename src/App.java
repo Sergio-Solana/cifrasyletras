@@ -39,7 +39,6 @@ public class App {
                         cifraExacta(numPartida, opsPartida);
                         cuantasMasPalabrasMejor(letrasPartida);
                     }
-                    break;
 
                 case 2:
                     menuConfiguracion();
@@ -96,8 +95,7 @@ public class App {
             System.out.println("1. Repeticiones: " + repeticiones);
             System.out.println("2. Cantidad de números: " + cantidadNumeros);
             System.out.println("3. Cantidad de letras: " + cantidadLetras);
-            System.out.println("4. Cantidad de operaciones: "
-                    + cantidadOperaciones);
+            System.out.println("4. Cantidad de operaciones: " + cantidadOperaciones);
             System.out.println("5. Volver al menú principal");
             System.out.print("Selecciona una opción: ");
 
@@ -312,8 +310,7 @@ public class App {
         System.out.println("Letras disponibles: " + letras);
     }
 
-    public static int introducirPalabras(
-            String jugador, String letras, String[] palabras) {
+    public static int introducirPalabras(String jugador, String letras, String[] palabras) {
 
         int cantidad = 0;
 
@@ -325,10 +322,6 @@ public class App {
             System.out.print("Palabra: ");
 
             String palabra = sc.nextLine().trim().toLowerCase();
-
-            if (palabra.isEmpty()) {
-                break;
-            }
 
             if (!puedeFormarse(palabra, letras)) {
                 System.out.println(
@@ -342,8 +335,7 @@ public class App {
             }
         }
 
-        System.out.println(jugador + " ha escrito "
-                + cantidad + " palabras.");
+        System.out.println(jugador + " ha escrito " + cantidad + " palabras.");
 
         return cantidad;
     }
