@@ -47,7 +47,7 @@ public class App {
                 default:
                     System.out.println("Opción no válida.");
             }
-        } while (opcion != 3);
+        while (opcion != 3);
 
         sc.close();
     }
