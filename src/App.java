@@ -105,23 +105,19 @@ public class App {
 
             switch (opcion) {
                 case 1:
-                    repeticiones = leerValor(
-                            "Repeticiones (1-20): ", 1, 20);
+                    repeticiones = leerValor("Repeticiones (1-20): ", 1, 20);
                     break;
 
                 case 2:
-                    cantidadNumeros = leerValor(
-                            "Cantidad de números (1-10): ", 1, 10);
+                    cantidadNumeros = leerValor("Cantidad de números (1-10): ", 1, 10);
                     break;
 
                 case 3:
-                    cantidadLetras = leerValor(
-                            "Cantidad de letras (8-26): ", 8, 26);
+                    cantidadLetras = leerValor("Cantidad de letras (8-26): ", 8, 26);
                     break;
 
                 case 4:
-                    cantidadOperaciones = leerValor(
-                            "Cantidad de operaciones (1-20): ", 1, 20);
+                    cantidadOperaciones = leerValor("Cantidad de operaciones (1-20): ", 1, 20);
                     break;
 
                 case 5:
@@ -138,8 +134,7 @@ public class App {
 
     public static void cifraExacta(int cantidad, int operaciones) {
         System.out.println("\n=== LA CIFRA EXACTA ===");
-        System.out.println("Cada jugador realizará " + operaciones
-                + " operaciones.");
+        System.out.println("Cada jugador realizará " + operaciones + " operaciones.");
 
         int[] numeros = generarNumeros(cantidad);
         jugar(numeros, operaciones);
@@ -165,8 +160,7 @@ public class App {
         int opcion;
 
         do {
-            System.out.print("Elige un número [1-"
-                    + numeros.length + "]: ");
+            System.out.print("Elige un número [1-" + numeros.length + "]: ");
             opcion = leerEntero();
 
             if (opcion < 1 || opcion > numeros.length) {
@@ -196,25 +190,16 @@ public class App {
                     System.out.print("Elige una operación (+, -, /, *): ");
                     String entrada = sc.nextLine().trim();
 
-                    if (entrada.length() == 1
-                            && "+-/*".indexOf(entrada.charAt(0)) >= 0) {
+                    if (entrada.length() == 1 && "+-/*".indexOf(entrada.charAt(0)) >= 0) {
                         operacion = entrada.charAt(0);
                         break;
                     }
 
-                    System.out.println(
-                            "Operación no válida. Inténtalo de nuevo.");
+                    System.out.println( "Operación no válida. Inténtalo de nuevo.");
                 }
 
                 System.out.print("Elige el segundo número: ");
                 int num2 = seleccionNumeros(numeros);
-
-                if (operacion == '/' && num2 == 0) {
-                    System.out.println(
-                            "No se puede dividir entre cero. Repite.");
-                    j--;
-                    continue;
-                }
 
                 switch (operacion) {
                     case '+':
