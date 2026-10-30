@@ -30,14 +30,18 @@ public class App {
                         System.out.println("\\n=== REPETICIÓN "
                                 + (i + 1) + " DE " + repeticiones + " ===");
                         cifraExacta(cantidadNumeros, cantidadOperaciones);
+                        laPalabraMasLarga();
+                        laCalculadoraHumana();
                         cuantasMasPalabrasMejor(cantidadLetras);
                     }
                     break;
 
                 case 2:
                     // MODO RÁPIDO
+                    cifraExacta(opcion, opcion);
                     laPalabraMasLarga();
                     laCalculadoraHumana();
+                    cuantasMasPalabrasMejor(opcion);
                     break;
 
                 case 3:
