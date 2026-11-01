@@ -29,7 +29,7 @@ public class App {
                     for (int i = 0; i < repeticiones; i++) {
                         System.out.println("\\n=== REPETICIÓN "
                                 + (i + 1) + " DE " + repeticiones + " ===");
-                        cifraExacta(cantidadNumeros, cantidadOperaciones);
+                        cifraExacta();
                         laPalabraMasLarga();
                         laCalculadoraHumana();
                         cuantasMasPalabrasMejor(cantidadLetras);
@@ -37,11 +37,7 @@ public class App {
                     break;
 
                 case 2:
-                    // MODO RÁPIDO
-                    cifraExacta(opcion, opcion);
-                    laPalabraMasLarga();
-                    laCalculadoraHumana();
-                    cuantasMasPalabrasMejor(opcion);
+                    modoRapido();
                     break;
 
                 case 3:
@@ -134,6 +130,36 @@ public static void mostrarMenu() {
 
 
 /* SEGUNDO JUEGO: LA PALABRA MÁS LARGA */
+public static void modoRapido(){
+    int opcion = 0;
+    do{
+        System.out.println("[1] La cifra exacta");
+        System.out.println("[2] La palabra más larga");
+        System.out.println("[3] La calculadora humana");
+        System.out.println("[4] Prueba original");
+        System.out.println("[5] Salir al menu principal");
+        System.out.print("Elige una opcion [1-4]: ");
+        opcion = sc.nextInt();
+
+        switch (opcion) {
+            case 1:
+                cifraExacta();
+                break;
+            case 2:
+                laPalabraMasLarga();
+                break;
+            case 3:
+                laCalculadoraHumana();
+                break;
+            case 4:
+                cuantasMasPalabrasMejor(opcion);
+                break;
+            case 5:
+                System.out.println("Saliendo al menu principal");
+                break;
+        }
+    }while(opcion != 5);
+}
 
 public static int laPalabraMasLarga() {
 
@@ -552,116 +578,179 @@ public static double turnoCalculadora(int jugador, int operaciones) {
 
     // ==================== LA CIFRA EXACTA ====================
 
-    public static void cifraExacta(int cantidad, int operaciones) {
-        System.out.println("\n=== LA CIFRA EXACTA ===");
-        System.out.println("Cada jugador realizará " + operaciones + " operaciones.");
-
-        int[] numeros = generarNumeros(cantidad);
-        jugar(numeros, operaciones);
-    }
-
-    public static int[] generarNumeros(int cantidad) {
-        int[] numeros = new int[cantidad];
-
-        System.out.println("Los números son:");
-
-        for (int i = 0; i < cantidad; i++) {
-            numeros[i] = generator.nextInt(10) + 1;
-            System.out.println((i + 1) + ": " + numeros[i]);
-        }
+    public static void cifraExacta() {
 
         int objetivo = generator.nextInt(900) + 100;
-        System.out.println("El número objetivo es: " + objetivo);
 
-        return numeros;
+        int[] numeros = new int[6];
+
+        for (int i = 0; i < numeros.length; i++) {
+            numeros[i] = generator.nextInt(10) + 1;
+        }
+
+        System.out.println("===== CIFRA EXACTA =====");
+        System.out.println("Numero objetivo: " + objetivo);
+
+        System.out.println("\nNumeros a elegir:");
+
+        mostrarNumeros(numeros);
+
+        // Turno del jugador 1
+        System.out.println("\n===== TURNO JUGADOR 1 =====");
+        double resultado1 = jugar(numeros);
+
+        // Turno del jugador 2
+        System.out.println("\n===== TURNO JUGADOR 2 =====");
+        double resultado2 = jugar(numeros);
+
+        // Calcular diferencias
+        double diferencia1 = Math.abs(objetivo - resultado1);
+        double diferencia2 = Math.abs(objetivo - resultado2);
+
+        System.out.println("\n===== RESULTADOS =====");
+
+        System.out.println("Numero objetivo: " + objetivo);
+
+        System.out.println("Resultado jugador 1: " + resultado1);
+        System.out.println("Diferencia: " + diferencia1);
+
+        System.out.println("Resultado jugador 2: " + resultado2);
+        System.out.println("Diferencia: " + diferencia2);
+
+        // Determinar ganador
+        if (diferencia1 < diferencia2) {
+            System.out.println("\n¡GANA EL JUGADOR 1!");
+
+        } else if (diferencia2 < diferencia1) {
+            System.out.println("\n¡GANA EL JUGADOR 2!");
+
+        } else {
+            System.out.println("\n¡EMPATE!");
+        }
     }
 
-    public static int seleccionNumeros(int[] numeros) {
-        int opcion;
+    // Funcion para jugar las cinco operaciones
+    public static double jugar(int[] numeros) {
+
+        double resultado = 0;
+
+        for (int i = 1; i <= 5; i++) {
+
+            System.out.println("\nOperacion " + i);
+
+            mostrarNumeros(numeros);
+
+            if (i == 1) {
+
+                // Primera operacion: seleccionar dos numeros
+                int posicion1 = pedirPosicion(numeros.length);
+                int numero1 = numeros[posicion1];
+
+                int posicion2 = pedirPosicion(numeros.length);
+                int numero2 = numeros[posicion2];
+
+                resultado = operar(numero1, numero2);
+
+            } else {
+
+                // Siguientes operaciones: seleccionar un numero
+                System.out.println("Resultado anterior: " + resultado);
+
+                int posicion = pedirPosicion(numeros.length);
+                int numero = numeros[posicion];
+
+                resultado = operar(resultado, numero);
+            }
+
+            System.out.println("Resultado obtenido: " + resultado);
+        }
+
+        return resultado;
+    }
+
+    // Mostrar la lista de numeros
+    public static void mostrarNumeros(int[] numeros) {
+
+        System.out.println("Lista de numeros:");
+
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.println((i + 1) + ". " + numeros[i]);
+        }
+    }
+
+    // Pedir la posicion de un numero
+    public static int pedirPosicion(int longitud) {
+
+        int posicion;
 
         do {
-            System.out.print("Elige un número [1-" + numeros.length + "]: ");
-            opcion = leerEntero();
+            System.out.print("Selecciona la posicion del numero (1-"
+                    + longitud + "): ");
 
-            if (opcion < 1 || opcion > numeros.length) {
-                System.out.println("Opción no válida.");
+            posicion = sc.nextInt();
+
+            if (posicion < 1 || posicion > longitud) {
+                System.out.println("Posicion incorrecta. Intentalo de nuevo.");
             }
-        } while (opcion < 1 || opcion > numeros.length);
 
-        return numeros[opcion - 1];
+        } while (posicion < 1 || posicion > longitud);
+
+        return posicion - 1;
     }
 
-    public static double jugar(int[] numeros, int operaciones) {
-        int[] resultados = new int[2];
+    // Realizar una operacion matematica
+    public static double operar(double num1, double num2) {
 
-        for (int i = 0; i < 2; i++) {
-            System.out.println("\nTurno del jugador " + (i + 1));
-            int resultado = 0;
+    int opcion = 0;
 
-            for (int j = 1; j <= operaciones; j++) {
-                System.out.println("Operación " + j);
+    System.out.println("\nSelecciona una operacion:");
+    System.out.println("1. Suma");
+    System.out.println("2. Resta");
+    System.out.println("3. Multiplicacion");
+    System.out.println("4. Division");
 
-                System.out.print("Elige el primer número: ");
-                int num1 = seleccionNumeros(numeros);
+    do {
 
-                char operacion;
+        System.out.print("Opcion: ");
 
-                while (true) {
-                    System.out.print("Elige una operación (+, -, /, *): ");
-                    String entrada = sc.nextLine().trim();
-
-                    if (entrada.length() == 1 && "+-/*".indexOf(entrada.charAt(0)) >= 0) {
-                        operacion = entrada.charAt(0);
-                        break;
-                    }
-
-                    System.out.println( "Operación no válida. Inténtalo de nuevo.");
-                }
-
-                System.out.print("Elige el segundo número: ");
-                int num2 = seleccionNumeros(numeros);
-
-                switch (operacion) {
-                    case '+':
-                        resultado += num1 + num2;
-                        break;
-
-                    case '-':
-                        resultado += num1 - num2;
-                        break;
-
-                    case '*':
-                        resultado += num1 * num2;
-                        break;
-
-                    case '/':
-                        resultado += num1 / num2;
-                        break;
-                }
-
-                System.out.println("Resultado acumulado: " + resultado);
-            }
-
-            resultados[i] = resultado;
-            System.out.println("Resultado final del jugador "
-                    + (i + 1) + ": " + resultado);
-        }
-
-        System.out.println("\n=== RESULTADOS DE LA CIFRA EXACTA ===");
-        System.out.println("Jugador 1: " + resultados[0]);
-        System.out.println("Jugador 2: " + resultados[1]);
-
-        if (resultados[0] > resultados[1]) {
-            System.out.println("¡Gana el jugador 1!");
-        } else if (resultados[1] > resultados[0]) {
-            System.out.println("¡Gana el jugador 2!");
+        if (sc.hasNextInt()) {
+            opcion = sc.nextInt();
         } else {
-            System.out.println("¡Empate!");
+            System.out.println("Debes introducir un numero entero.");
+            sc.next();
+            opcion = 0;
+            continue;
         }
 
-        return Math.max(resultados[0], resultados[1]);
-    }
+        if (opcion < 1 || opcion > 4) {
+            System.out.println("Operacion incorrecta.");
+        }
 
+        if (opcion == 4 && num2 == 0) {
+            System.out.println("No se puede dividir entre cero.");
+            opcion = 0;
+        }
+
+    } while (opcion < 1 || opcion > 4);
+
+    switch (opcion) {
+
+        case 1:
+            return num1 + num2;
+
+        case 2:
+            return num1 - num2;
+
+        case 3:
+            return num1 * num2;
+
+        case 4:
+            return num1 / num2;
+
+        default:
+            return 0;
+    }
+}
     // ==================== LA PALABRA MÁS LARGA ====================
 
     public static void cuantasMasPalabrasMejor(int cantidadLetras) {
