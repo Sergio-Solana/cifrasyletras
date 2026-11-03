@@ -591,23 +591,23 @@ public static double turnoCalculadora(int jugador, int operaciones) {
         System.out.println("===== CIFRA EXACTA =====");
         System.out.println("Numero objetivo: " + objetivo);
 
-        System.out.println("\nNumeros a elegir:");
+        System.out.println("Numeros a elegir:");
 
         mostrarNumeros(numeros);
 
         // Turno del jugador 1
-        System.out.println("\n===== TURNO JUGADOR 1 =====");
+        System.out.println("===== TURNO JUGADOR 1 =====");
         double resultado1 = jugar(numeros);
 
         // Turno del jugador 2
-        System.out.println("\n===== TURNO JUGADOR 2 =====");
+        System.out.println("===== TURNO JUGADOR 2 =====");
         double resultado2 = jugar(numeros);
 
         // Calcular diferencias
         double diferencia1 = Math.abs(objetivo - resultado1);
         double diferencia2 = Math.abs(objetivo - resultado2);
 
-        System.out.println("\n===== RESULTADOS =====");
+        System.out.println("===== RESULTADOS =====");
 
         System.out.println("Numero objetivo: " + objetivo);
 
@@ -619,13 +619,13 @@ public static double turnoCalculadora(int jugador, int operaciones) {
 
         // Determinar ganador
         if (diferencia1 < diferencia2) {
-            System.out.println("\n¡GANA EL JUGADOR 1!");
+            System.out.println("¡GANA EL JUGADOR 1!");
 
         } else if (diferencia2 < diferencia1) {
-            System.out.println("\n¡GANA EL JUGADOR 2!");
+            System.out.println("¡GANA EL JUGADOR 2!");
 
         } else {
-            System.out.println("\n¡EMPATE!");
+            System.out.println("¡EMPATE!");
         }
     }
 
@@ -636,7 +636,7 @@ public static double turnoCalculadora(int jugador, int operaciones) {
 
         for (int i = 1; i <= 5; i++) {
 
-            System.out.println("\nOperacion " + i);
+            System.out.println("Operacion " + i);
 
             mostrarNumeros(numeros);
 
@@ -703,7 +703,7 @@ public static double turnoCalculadora(int jugador, int operaciones) {
 
     int opcion = 0;
 
-    System.out.println("\nSelecciona una operacion:");
+    System.out.println("Selecciona una operacion:");
     System.out.println("1. Suma");
     System.out.println("2. Resta");
     System.out.println("3. Multiplicacion");
@@ -754,7 +754,7 @@ public static double turnoCalculadora(int jugador, int operaciones) {
     // ==================== LA PALABRA MÁS LARGA ====================
 
     public static void cuantasMasPalabrasMejor(int cantidadLetras) {
-        System.out.println("\n=== LA PALABRA MÁS LARGA ===");
+        System.out.println("=== LA PALABRA MÁS LARGA ===");
 
         String letras = generarLetras(cantidadLetras);
         mostrarLetras(letras);
@@ -825,7 +825,7 @@ public static double turnoCalculadora(int jugador, int operaciones) {
 
         int cantidad = 0;
 
-        System.out.println("\nTurno de " + jugador);
+        System.out.println("Turno de " + jugador);
         System.out.println("Escribe una palabra por línea.");
         System.out.println("Pulsa ENTER para terminar.");
 
@@ -903,7 +903,7 @@ public static double turnoCalculadora(int jugador, int operaciones) {
     public static int comprobarPalabras(String jugador, int cantidad) {
         int incorrectas;
 
-        System.out.println("\nEl oponente revisa las palabras de " + jugador);
+        System.out.println("El oponente revisa las palabras de " + jugador);
         System.out.println("Si todas son correctas, introduce 0.");
 
         do {
@@ -929,14 +929,14 @@ public static double turnoCalculadora(int jugador, int operaciones) {
             int cantidad1, int incorrectas1, int puntos1,
             int cantidad2, int incorrectas2, int puntos2) {
 
-        System.out.println("\n=== RESULTADOS FINALES ===");
+        System.out.println("=== RESULTADOS FINALES ===");
 
         System.out.println("Jugador 1:");
         System.out.println("Palabras: " + cantidad1);
         System.out.println("Incorrectas: " + incorrectas1);
         System.out.println("Puntos: " + puntos1);
 
-        System.out.println("\nJugador 2:");
+        System.out.println("Jugador 2:");
         System.out.println("Palabras: " + cantidad2);
         System.out.println("Incorrectas: " + incorrectas2);
         System.out.println("Puntos: " + puntos2);
